@@ -1,4 +1,4 @@
-package vacation.place.model
+package co.nes.parceltestkmp.vacation.place.model
 
 class VacationInfoDTO {
 
