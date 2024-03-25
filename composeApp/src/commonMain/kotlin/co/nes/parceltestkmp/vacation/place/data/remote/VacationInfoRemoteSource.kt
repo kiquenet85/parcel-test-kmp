@@ -1,16 +1,17 @@
 package co.nes.parceltestkmp.vacation.place.data.remote
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
-import kotlinx.coroutines.withContext
+import co.nes.parceltestkmp.providers.DispatcherProvider
 import co.nes.parceltestkmp.vacation.place.model.VacationInfoDTO
+import kotlinx.coroutines.withContext
 
 interface VacationInfoRemoteSource {
     suspend fun getVacationInfo() :  VacationInfoDTO
 }
 
-class VacationInfoRemoteImpl() : VacationInfoRemoteSource {
-    override suspend fun getVacationInfo(): VacationInfoDTO = withContext(Dispatchers.IO) {
+class VacationInfoRemoteImpl(
+    private val dispatcherProvider: DispatcherProvider
+) : VacationInfoRemoteSource {
+    override suspend fun getVacationInfo(): VacationInfoDTO = withContext(dispatcherProvider.getIO()) {
         val jsonResponse = """
             [
           {
