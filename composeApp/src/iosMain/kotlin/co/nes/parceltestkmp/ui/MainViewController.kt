@@ -1,4 +1,4 @@
-package co.nes.parceltestkmp
+package co.nes.parceltestkmp.ui
 
 import androidx.compose.ui.window.ComposeUIViewController
 
