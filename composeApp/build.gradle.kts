@@ -50,6 +50,9 @@ kotlin {
             // Koin
             implementation(libs.bundles.koin.shared)
 
+            // Material Design
+            implementation(compose.material3)
+
             // Serialization
             implementation(libs.kotlinx.serialization.json)
 
