@@ -1,3 +1,5 @@
+package co.nes.parceltestkmp
+
 import platform.UIKit.UIDevice
 
 class IOSPlatform: Platform {
