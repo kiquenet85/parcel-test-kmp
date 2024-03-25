@@ -50,8 +50,14 @@ kotlin {
             // Koin
             implementation(libs.bundles.koin.shared)
 
+            // Material Design
+            implementation(compose.material3)
+
             // Serialization
             implementation(libs.kotlinx.serialization.json)
+
+            // Voyager
+            implementation(libs.bundles.voyager)
         }
         commonTest.dependencies {
             // Coroutines
