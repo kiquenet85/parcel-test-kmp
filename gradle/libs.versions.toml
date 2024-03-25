@@ -20,7 +20,8 @@ junit = "4.13.2"
 kotlin = "1.9.22"
 
 ## Corrutines
-org-jetbrains-kotlinx-coroutines = "1.7.3"
+kotlinxSerializationJson = "1.6.3"
+org-jetbrains-kotlinx-coroutines = "1.8.0"
 
 ## Koin
 koin = "3.5.0"
@@ -46,6 +47,7 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 
 ### Coroutines
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 org-jetbrains-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "org-jetbrains-kotlinx-coroutines" }
 org-jetbrains-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "org-jetbrains-kotlinx-coroutines" }
 
