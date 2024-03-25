@@ -1,3 +1,5 @@
+package co.nes.parceltestkmp
+
 class Greeting {
     private val platform = getPlatform()
 

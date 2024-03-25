@@ -1,5 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
@@ -10,7 +8,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
             }
         }
     }
@@ -31,6 +29,9 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+
+            // Koin
+            implementation(libs.bundles.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -39,6 +40,23 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            // Coroutines
+            implementation(libs.org.jetbrains.kotlinx.coroutines.core)
+
+            // Compose - Coil
+            implementation(libs.coil.compose)
+
+            // Koin
+            implementation(libs.bundles.koin.shared)
+        }
+        commonTest.dependencies {
+            // Coroutines
+            implementation(libs.org.jetbrains.kotlinx.coroutines.test)
+
+            // Kotlin test
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlin.test.junit)
         }
     }
 }
@@ -69,8 +87,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     dependencies {
         debugImplementation(libs.compose.ui.tooling)

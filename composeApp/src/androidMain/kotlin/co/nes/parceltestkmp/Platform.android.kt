@@ -1,3 +1,5 @@
+package co.nes.parceltestkmp
+
 import android.os.Build
 
 class AndroidPlatform : Platform {
