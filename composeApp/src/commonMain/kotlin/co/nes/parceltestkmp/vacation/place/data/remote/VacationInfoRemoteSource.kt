@@ -1,9 +1,9 @@
-package vacation.place.service
+package co.nes.parceltestkmp.vacation.place.data.remote
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
-import vacation.place.model.VacationInfoDTO
+import co.nes.parceltestkmp.vacation.place.model.VacationInfoDTO
 
 interface VacationInfoRemoteSource {
     suspend fun getVacationInfo() :  VacationInfoDTO
