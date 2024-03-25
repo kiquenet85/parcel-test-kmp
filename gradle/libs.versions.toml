@@ -4,8 +4,8 @@ android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
 
-## Android Versions
-agp = "8.2.2"
+### Android Versions
+agp = "8.3.1"
 androidx-activityCompose = "1.8.2"
 androidx-appcompat = "1.6.1"
 androidx-constraintlayout = "2.1.4"
@@ -19,12 +19,15 @@ compose-plugin = "1.6.0"
 junit = "4.13.2"
 kotlin = "1.9.22"
 
-## Corrutines
+### Corrutines
 kotlinxSerializationJson = "1.6.3"
 org-jetbrains-kotlinx-coroutines = "1.8.0"
 
-## Koin
+### Koin
 koin = "3.5.0"
+
+### Voyager
+voyager = "1.0.0"
 
 [libraries]
 ### Kotlin
@@ -57,6 +60,13 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }
 
+### Voyager
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
+voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -66,3 +76,7 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 [bundles]
 koin-android = ["koin-core", "koin-android", "koin-androidx-compose"]
 koin-shared = ["koin-core", "koin-test"]
+voyager = [
+    "voyager-navigator", "voyager-bottomSheetNavigator", "voyager-tabNavigator",
+    "voyager-transitions", "voyager-koin"
+]

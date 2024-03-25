@@ -52,6 +52,9 @@ kotlin {
 
             // Serialization
             implementation(libs.kotlinx.serialization.json)
+
+            // Voyager
+            implementation(libs.bundles.voyager)
         }
         commonTest.dependencies {
             // Coroutines
