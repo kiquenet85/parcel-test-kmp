@@ -49,6 +49,9 @@ kotlin {
 
             // Koin
             implementation(libs.bundles.koin.shared)
+
+            // Serialization
+            implementation(libs.kotlinx.serialization.json)
         }
         commonTest.dependencies {
             // Coroutines
