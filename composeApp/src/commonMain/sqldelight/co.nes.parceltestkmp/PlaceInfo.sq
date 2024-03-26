@@ -26,5 +26,5 @@ WHERE name = ?;
 
 updatePlaceInfoByName:
 UPDATE PlaceInfo
-SET score = :score, reviews = :reviews, description = :description, facilities = :facilities, price = :price
+SET score = :score, reviews = :reviews, description = :description, facilities = :facilities, price = :price, latitude = :latitude, longitude = :longitude
 WHERE name = :name;
