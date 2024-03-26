@@ -1,5 +1,8 @@
 package co.nes.parceltestkmp.feature.place.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PlaceInfoDTO(
     val name: String,
     val rating: Double,

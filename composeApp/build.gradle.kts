@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    id("app.cash.sqldelight") version libs.versions.sqldelight
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 kotlin {
@@ -32,6 +34,9 @@ kotlin {
 
             // Koin
             implementation(libs.bundles.koin.android)
+
+            // SQLDelight
+            implementation(libs.sqldelight.android.driver)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -58,7 +63,16 @@ kotlin {
 
             // Voyager
             implementation(libs.bundles.voyager)
+
+            // SQLDelight
+            implementation(libs.sqldelight.coroutines)
         }
+
+        iosMain.dependencies {
+            // SQLDelight
+            implementation(libs.sqldelight.ios.driver)
+        }
+
         commonTest.dependencies {
             // Coroutines
             implementation(libs.org.jetbrains.kotlinx.coroutines.test)
@@ -107,3 +121,10 @@ android {
     }
 }
 
+sqldelight {
+    databases {
+        create("VacationDatabase") {
+            packageName.set("co.nes.parceltestkmp.data_access.database")
+        }
+    }
+}

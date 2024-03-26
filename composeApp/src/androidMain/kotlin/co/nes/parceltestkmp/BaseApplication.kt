@@ -1,6 +1,8 @@
 package co.nes.parceltestkmp
 
 import android.app.Application
+import co.nes.parceltestkmp.koin.AndroidMainModules
+import co.nes.parceltestkmp.koin.SharedModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +19,12 @@ class BaseApplication : Application() {
                 androidLogger(level = Level.DEBUG)
             }
 
-            modules()
+            modules(
+                AndroidMainModules.getDatabaseModule(),
+
+                SharedModules.getDispatcherProviderModule(),
+                SharedModules.getVacationModule(),
+            )
         }
     }
 }
