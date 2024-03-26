@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
-    id("app.cash.sqldelight") version libs.versions.sqldelight
+    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.touchlab.skie)
     kotlin("plugin.serialization") version "1.9.22"
 }
 
@@ -61,16 +62,20 @@ kotlin {
             // Serialization
             implementation(libs.kotlinx.serialization.json)
 
+            // SQLDelight
+            implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines)
+
             // Voyager
             implementation(libs.bundles.voyager)
-
-            // SQLDelight
-            implementation(libs.sqldelight.coroutines)
         }
 
         iosMain.dependencies {
             // SQLDelight
             implementation(libs.sqldelight.ios.driver)
+
+            // TouchLab
+            implementation(libs.touchlab.stately.common)
         }
 
         commonTest.dependencies {

@@ -5,7 +5,7 @@ android-minSdk = "24"
 android-targetSdk = "34"
 
 ### Android Versions
-agp = "8.2.0"
+agp = "8.2.2"
 androidx-activityCompose = "1.8.2"
 androidx-appcompat = "1.6.1"
 androidx-constraintlayout = "2.1.4"
@@ -26,8 +26,14 @@ org-jetbrains-kotlinx-coroutines = "1.8.0"
 ### Koin
 koin = "3.5.0"
 
+### Skie
+skie = "0.6.2"
+
 ### SqlDeligth
 sqldelight = "2.0.1"
+
+### Touchlab
+touchlab-stately-common = "2.0.7"
 
 ### Voyager
 voyager = "1.0.0"
@@ -71,15 +77,25 @@ voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", vers
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 
 ### SQLDelight
+sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-ios-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+
+### Touchlab
+touchlab-stately-common = { module = "co.touchlab:stately-common", version.ref = "touchlab-stately-common" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+
+## Skie
+touchlab-skie = { id = "co.touchlab.skie", version.ref = "skie" }
+
+### SQLDelight
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [bundles]
 koin-android = ["koin-core", "koin-android", "koin-androidx-compose"]
