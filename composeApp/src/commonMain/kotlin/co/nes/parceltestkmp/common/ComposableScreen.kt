@@ -1,4 +1,4 @@
-package co.nes.parceltestkmp.ui
+package co.nes.parceltestkmp.common
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen

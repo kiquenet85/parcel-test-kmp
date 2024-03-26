@@ -1,4 +1,4 @@
-package co.nes.parceltestkmp.vacation.place.ui
+package co.nes.parceltestkmp.feature.place.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,21 +8,21 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import co.nes.parceltestkmp.ui.ComposableScreen
+import co.nes.parceltestkmp.common.ComposableScreen
 
-class HomeScreen(): ComposableScreen({
+class DetailScreen: ComposableScreen({
     val navigator = LocalNavigator.currentOrThrow
 
     Surface(
         modifier = Modifier.fillMaxSize(),
     ) {
         Column {
-            Text("Home Screen")
+            Text("Detail Screen")
 
             Button(onClick = {
                 navigator.pop()
             }) {
-                Text("Go to Splash Screen")
+                Text("Go to Home Screen")
             }
         }
     }

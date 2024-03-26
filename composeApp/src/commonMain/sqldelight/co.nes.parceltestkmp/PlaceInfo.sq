@@ -1,0 +1,30 @@
+CREATE TABLE PlaceInfo (
+    name TEXT NOT NULL PRIMARY KEY,
+    score REAL NOT NULL,
+    reviews INTEGER NOT NULL,
+    description TEXT NOT NULL,
+    facilities TEXT NOT NULL,
+    price REAL NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL
+);
+
+getLocations:
+SELECT * FROM PlaceInfo;
+
+getLocationByName:
+SELECT * FROM PlaceInfo
+WHERE name = ?;
+
+insertLocation:
+INSERT OR REPLACE INTO PlaceInfo(name, score, reviews, description, facilities, price, latitude, longitude)
+VALUES (:name, :score, :reviews, :description, :facilities, :price, :latitude, :longitude);
+
+deleteLocation:
+DELETE FROM PlaceInfo
+WHERE name = ?;
+
+updateLocation:
+UPDATE PlaceInfo
+SET score = :score, reviews = :reviews, description = :description, facilities = :facilities, price = :price
+WHERE name = :name;
