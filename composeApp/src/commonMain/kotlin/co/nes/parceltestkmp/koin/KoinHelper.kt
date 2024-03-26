@@ -1,7 +1,7 @@
 package co.nes.parceltestkmp.koin
 
 import androidx.compose.runtime.Composable
-import co.nes.parceltestkmp.viewmodel.ViewModel
+import co.nes.parceltestkmp.common.view_model.ViewModel
 
 @Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 expect object KoinHelperKmp {

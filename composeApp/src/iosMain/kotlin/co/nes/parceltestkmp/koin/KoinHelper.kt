@@ -2,7 +2,7 @@ package co.nes.parceltestkmp.koin
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import co.nes.parceltestkmp.viewmodel.ViewModel
+import co.nes.parceltestkmp.common.view_model.ViewModel
 import org.koin.core.Koin
 import org.koin.core.context.startKoin
 import kotlin.native.concurrent.ThreadLocal

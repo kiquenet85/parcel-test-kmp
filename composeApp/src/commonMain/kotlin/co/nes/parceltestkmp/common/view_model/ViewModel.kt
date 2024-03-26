@@ -1,4 +1,4 @@
-package co.nes.parceltestkmp.viewmodel
+package co.nes.parceltestkmp.common.view_model
 
 import kotlinx.coroutines.CoroutineScope
 

@@ -1,4 +1,4 @@
-package co.nes.parceltestkmp.splash_screen
+package co.nes.parceltestkmp.feature.splash_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -9,10 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import co.nes.parceltestkmp.ui.ComposableScreen
+import co.nes.parceltestkmp.common.ComposableScreen
 import co.nes.parceltestkmp.ui.components.AspenButton
 import co.nes.parceltestkmp.ui.theme.AspenTheme
-import co.nes.parceltestkmp.vacation.place.ui.HomeScreen
+import co.nes.parceltestkmp.feature.home.HomeScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import parceltestkmp.composeapp.generated.resources.AspenSplashScreen
