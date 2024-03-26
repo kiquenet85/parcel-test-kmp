@@ -1,0 +1,23 @@
+CREATE TABLE Place (
+    name TEXT NOT NULL PRIMARY KEY,
+    image TEXT NOT NULL,
+    is_favorite INTEGER NOT NULL, -- sotere as 0 or 1
+    rating REAL NOT NULL,
+    section INTEGER NOT NULL -- 0 popular 1 recommended (to know wich places are popular)
+);
+
+getAllPlaces:
+SELECT * FROM Place;
+
+insertPlace:
+INSERT INTO Place (name, image, is_favorite, rating, section)
+VALUES (?, ?, ?, ?, ?);
+
+updatePlace:
+UPDATE Place
+SET image = :image, is_favorite = :isFavorite, rating = :rating, section = :section
+WHERE name = :name;
+
+deletePlace:
+DELETE FROM Place
+WHERE name = :name;

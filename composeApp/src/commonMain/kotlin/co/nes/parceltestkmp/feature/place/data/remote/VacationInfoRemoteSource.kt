@@ -5,6 +5,7 @@ import co.nes.parceltestkmp.feature.place.model.Place
 import co.nes.parceltestkmp.providers.DispatcherProvider
 import co.nes.parceltestkmp.feature.place.model.VacationInfoDTO
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 
 interface VacationInfoRemoteSource {
     suspend fun getVacationInfo() :  VacationInfoDTO
@@ -59,7 +60,9 @@ class VacationInfoRemoteImpl(
         }
                 """.trimIndent()
 
-        tempData
+        val vacationInfoDTO = Json.decodeFromString<VacationInfoDTO>(jsonResponse)
+
+        vacationInfoDTO
     }
 
 
@@ -152,4 +155,3 @@ class VacationInfoRemoteImpl(
         )
     }
 }
-

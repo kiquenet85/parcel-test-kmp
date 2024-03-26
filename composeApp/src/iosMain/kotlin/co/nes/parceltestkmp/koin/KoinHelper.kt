@@ -15,6 +15,7 @@ object KoinContainer {
         koinApp = startKoin {
             modules(
                 IOSMainModules.getDatabaseModule(),
+                IOSMainModules.getDetailsModule(),
 
                 SharedModules.getDispatcherProviderModule(),
                 SharedModules.getVacationModule(),

@@ -21,6 +21,7 @@ class BaseApplication : Application() {
 
             modules(
                 AndroidMainModules.getDatabaseModule(),
+                AndroidMainModules.getDetailsModule(),
 
                 SharedModules.getDispatcherProviderModule(),
                 SharedModules.getVacationModule(),

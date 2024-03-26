@@ -1,17 +1,23 @@
 package co.nes.parceltestkmp.feature.place.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class VacationInfoDTO(
-    val places: Category<Place>,
-    val hotels: Category<Any?>? = null,
-    val food: Category<Any?>? = null,
-    val adventures: Category<Any?>? = null
+    val places: Category,
+    val hotels: Category? = null,
+    val food: Category? = null,
+    val adventures: Category? = null
 )
 
-data class Category<T>(
-    val popular: List<T>,
-    val recommended: List<T>
+@Serializable
+data class Category(
+    val id: String? = null,
+    val popular: List<Place>,
+    val recommended: List<Place>
 )
 
+@Serializable
 data class Place(
     val name: String,
     val image: String,

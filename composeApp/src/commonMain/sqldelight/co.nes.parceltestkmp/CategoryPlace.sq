@@ -1,0 +1,14 @@
+CREATE TABLE CategoryPlace (
+    category_id INTEGER NOT NULL,
+    place_name TEXT NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES Category(id),
+    FOREIGN KEY (place_name) REFERENCES Place(name)
+);
+
+insertRelation:
+INSERT INTO CategoryPlace (category_id, place_name)
+VALUES (:categoryId, :placeName);
+
+deleteRelation:
+DELETE FROM CategoryPlace
+WHERE category_id = :categoryId AND place_name = :placeName;
