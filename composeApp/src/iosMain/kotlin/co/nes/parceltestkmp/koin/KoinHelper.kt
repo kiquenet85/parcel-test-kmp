@@ -13,7 +13,12 @@ object KoinContainer {
 
     fun initKoin() {
         koinApp = startKoin {
-            modules()
+            modules(
+                IOSMainModules.getDatabaseModule(),
+
+                SharedModules.getDispatcherProviderModule(),
+                SharedModules.getVacationModule(),
+            )
         }.koin
     }
 }
