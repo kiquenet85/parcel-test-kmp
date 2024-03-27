@@ -1,6 +1,6 @@
 package co.nes.parceltestkmp.feature.place.model
 
-//import co.nes.parceltestkmp.feature.place.horizontalList.mvi.PlaceListView
+import co.nes.parceltestkmp.feature.place.horizontalList.mvi.PlaceListView
 import conesparceltestkmp.PlaceEntity
 
 fun PlaceInfoDTO.toPlaceEntity(section: Long): PlaceEntity {
@@ -34,5 +34,22 @@ fun Place.toPlaceEntity(section: Int): PlaceEntity {
         section = section.toLong()
     )
 }
+
+fun PlaceListView.PlaceUI.PlaceItem.toPlaceEntity(): PlaceEntity {
+    return PlaceEntity(
+        name = name,
+        urlImage = urlImage ?: "",
+        score = rating,
+        reviews = 0,
+        description = "no description",
+        facilities = "No facilities",
+        price = 0.toDouble(),
+        latitude = 0.toDouble(),
+        longitude = 0.toDouble(),
+        isFavorite = if (isFavorite) 1 else 0,
+        section = section.toLong()
+    )
+}
+
 
 fun List<String>.concat() = this.joinToString(",") { it }.takeWhile { !it.isDigit() }
