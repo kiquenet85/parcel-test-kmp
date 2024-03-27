@@ -26,7 +26,7 @@ class PlaceDatabaseImpl(
             database.placeEntityQueries.getPlaceEntityByName(name)
                 .asFlow()
                 .map { placeInfo ->
-                    placeInfo.executeAsOne()
+                    placeInfo.executeAsOneOrNull() ?: throw NoSuchElementException("PlaceEntity not found for name: $name")
                 }
         }
 

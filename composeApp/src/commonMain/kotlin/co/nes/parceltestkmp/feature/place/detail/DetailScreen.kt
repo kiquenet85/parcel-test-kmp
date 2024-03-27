@@ -47,6 +47,7 @@ class DetailScreen : ComposableScreen({
     val placeInfo = viewModel.singlePlaceInfo.collectAsState().value
     val allPlaceInfo = viewModel.allPlaceInfo.collectAsState().value
     val placeInfoByName = viewModel.placeInfoByName.collectAsState().value
+    val vacationInfoData = viewModel.vacationInfoData.collectAsState().value
 
     val isFavorite = true
 
@@ -201,6 +202,14 @@ class DetailScreen : ComposableScreen({
                 AspenText("Get by Name")
             }
             AspenText(placeInfoByName)
+            AspenText(placeInfoByName)
+
+            AspenButton(onClick = {
+                viewModel.getVacationInfoData()
+            }) {
+                AspenText("Get all and save in db")
+            }
+            AspenText(vacationInfoData)
         }
     }
 })

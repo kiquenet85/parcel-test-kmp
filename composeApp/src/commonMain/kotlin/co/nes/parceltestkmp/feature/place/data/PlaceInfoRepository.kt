@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.ExperimentalTime
 
 interface PlaceInfoRepository {
     suspend fun fetchVacationInfo() : Flow<VacationInfoDTO>
@@ -18,6 +21,8 @@ interface PlaceInfoRepository {
     suspend fun getAllPlaceInfo(): Flow<List<PlaceEntity>>
     suspend fun getPlaceByName(name: String): Flow<PlaceEntity>
     suspend fun updatePlaceInfo(newItem: PlaceEntity)
+    @ExperimentalTime
+    suspend fun getVacationInfoData(): Flow<VacationInfoDTO>
 }
 
 class PlaceInfoRepositoryImpl(
@@ -25,6 +30,25 @@ class PlaceInfoRepositoryImpl(
     private val placeDatabase: PlaceDatabase,
     private val dispatcherProvider: DispatcherProvider
 ) : PlaceInfoRepository {
+    private var cachedData: Flow<VacationInfoDTO>? = null
+    private var cacheExpiryTime: Duration = Duration.ZERO // Initial value, assuming cache is initially empty
+
+    @ExperimentalTime
+    override suspend fun getVacationInfoData(): Flow<VacationInfoDTO> = withContext(dispatcherProvider.getIO()) {
+        // Check if cache is populated and not expired
+        if (cachedData != null && cacheExpiryTime > Duration.ZERO) {
+            return@withContext cachedData!! // Return cached data
+        }
+
+        // If cache is empty or expired, fetch fresh data
+        val freshData = fetchVacationInfo()
+
+        // Update cache
+        cachedData = freshData
+        cacheExpiryTime = 1.minutes // 1 minute expiry time
+
+        freshData
+    }
     override suspend fun fetchVacationInfo(): Flow<VacationInfoDTO> = withContext(dispatcherProvider.getIO()) {
         placeService.fetchVacationInfo().map { vacationInfo ->
             val popularSection = vacationInfo.places.popular.map { it.toPlaceEntity(POPULAR_SECTION) }
