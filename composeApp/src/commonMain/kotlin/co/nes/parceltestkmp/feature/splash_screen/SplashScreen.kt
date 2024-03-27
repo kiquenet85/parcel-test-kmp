@@ -3,9 +3,11 @@ package co.nes.parceltestkmp.feature.splash_screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.nes.parceltestkmp.common.ComposableScreen
@@ -34,6 +36,7 @@ class SplashScreen: ComposableScreen({
         )
 
         AspenButton(
+            modifier = Modifier.padding(32.dp),
             onClick = {
                 navigator.push(HomeScreen())
             }
