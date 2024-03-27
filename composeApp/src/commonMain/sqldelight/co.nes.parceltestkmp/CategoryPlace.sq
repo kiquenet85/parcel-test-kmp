@@ -2,7 +2,7 @@ CREATE TABLE CategoryPlace (
     category_id INTEGER NOT NULL,
     place_name TEXT NOT NULL,
     FOREIGN KEY (category_id) REFERENCES Category(id),
-    FOREIGN KEY (place_name) REFERENCES Place(name)
+    FOREIGN KEY (place_name) REFERENCES PlaceEntity(name)
 );
 
 insertRelation:

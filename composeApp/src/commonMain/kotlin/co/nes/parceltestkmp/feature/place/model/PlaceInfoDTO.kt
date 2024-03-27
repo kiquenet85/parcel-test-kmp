@@ -13,5 +13,7 @@ data class PlaceInfoDTO(
     val facilities: List<String>,
     val price: Double,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val imageURL : String = String(),
+    val isFavorite: Boolean = false
 )
