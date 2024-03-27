@@ -3,7 +3,6 @@ package co.nes.parceltestkmp.feature.splash_screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -11,8 +10,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.nes.parceltestkmp.common.ComposableScreen
 import co.nes.parceltestkmp.ui.components.AspenButton
-import co.nes.parceltestkmp.ui.theme.AspenTheme
 import co.nes.parceltestkmp.feature.home.HomeScreen
+import co.nes.parceltestkmp.ui.components.AspenText
+import co.nes.parceltestkmp.ui.theme.AspenTheme
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import parceltestkmp.composeapp.generated.resources.AspenSplashScreen
@@ -38,9 +38,9 @@ class SplashScreen: ComposableScreen({
                 navigator.push(HomeScreen())
             }
         ) {
-            Text(
+            AspenText(
                 "Explore",
-                color = AspenTheme.aspenColors.onPrimary
+                color = AspenTheme.colors.onPrimary,
             )
         }
     }

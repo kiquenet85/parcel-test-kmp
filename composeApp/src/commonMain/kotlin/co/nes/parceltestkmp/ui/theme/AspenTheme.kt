@@ -27,7 +27,7 @@ object AspenTheme {
         return LocalTypography
     }
 
-    val aspenColors: AspenColors
+    val colors: AspenColors
         @Composable
         get() = LocalAspenColors.current
 
@@ -41,7 +41,7 @@ fun AspenTheme(
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
-        AspenTheme.getAspenColors() provides AspenTheme.aspenColors,
+        AspenTheme.getAspenColors() provides AspenTheme.colors,
         AspenTheme.getTypography() provides AspenTheme.typography,
     ) {
         content()

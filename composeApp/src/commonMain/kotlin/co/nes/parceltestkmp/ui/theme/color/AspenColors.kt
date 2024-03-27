@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 class AspenColors(
-    primary: Brush,
+    primary: Color,
     onPrimary: Color,
     secondary: Color,
     onSecondary: Color,
@@ -15,6 +15,8 @@ class AspenColors(
     onTertiary: Color,
     background: Color,
     onBackground: Color,
+    bottomBarColor: Color,
+    primaryGradient: Brush,
 ) {
     var primary by mutableStateOf(primary)
         internal set
@@ -38,5 +40,11 @@ class AspenColors(
         internal set
 
     var onBackground by mutableStateOf(onBackground)
+        internal set
+
+    var bottomBarColor by mutableStateOf(bottomBarColor)
+        internal set
+
+    var primaryGradient by mutableStateOf(primaryGradient)
         internal set
 }
