@@ -1,0 +1,34 @@
+CREATE TABLE PlaceEntity
+(
+    name TEXT NOT NULL PRIMARY KEY,
+    score REAL NOT NULL DEFAULT 0.0,
+    reviews INTEGER NOT NULL DEFAULT 0,
+    description TEXT NOT NULL,
+    facilities TEXT NOT NULL,
+    price REAL NOT NULL DEFAULT 0.0,
+    latitude REAL NOT NULL DEFAULT 0.0,
+    longitude REAL NOT NULL DEFAULT 0.0,
+    isFavorite INTEGER NOT NULL DEFAULT 0,
+    section INTEGER NOT NULL DEFAULT 0,
+    urlImage TEXT NOT NULL
+);
+
+getPlaceEntitys:
+SELECT * FROM PlaceEntity;
+
+getPlaceEntityByName:
+SELECT * FROM PlaceEntity
+WHERE name = ?;
+
+insertPlaceEntity:
+INSERT OR REPLACE INTO PlaceEntity(name, score, reviews, description, facilities, price, latitude, longitude, isFavorite, section, urlImage)
+VALUES (:name, :score, :reviews, :description, :facilities, :price, :latitude, :longitude, :isFavorite, :section, :urlImage);
+
+deletePlaceEntityByName:
+DELETE FROM PlaceEntity
+WHERE name = ?;
+
+updatePlaceEntityByName:
+UPDATE PlaceEntity
+SET score = :score, reviews = :reviews, description = :description, facilities = :facilities, price = :price, latitude = :latitude, longitude = :longitude, isFavorite = :isFavorite, section = :section, urlImage = :urlImage
+WHERE name = :name;

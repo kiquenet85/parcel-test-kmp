@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
-import co.nes.parceltestkmp.feature.place.data.remote.VacationInfoRemoteImpl
+import co.nes.parceltestkmp.feature.place.data.remote.PlaceRemoteImpl
 import co.nes.parceltestkmp.feature.place.detail.DetailScreen
 import co.nes.parceltestkmp.feature.place.location_list.PopularList
 import co.nes.parceltestkmp.feature.place.location_list.RecommendedList
@@ -38,12 +38,12 @@ fun ExploreSection(innerPadding: PaddingValues, navigator: Navigator) {
         when (val newValue = selectedTab.value) {
             ExploreTab.Place.idx -> {
                 PopularList(
-                    popular = VacationInfoRemoteImpl.tempData.places.popular,
+                    popular = PlaceRemoteImpl.tempData.places.popular,
                     onPopularItemClicked = { navigator.push(DetailScreen()) },
                 )
 
                 RecommendedList(
-                    recommended = VacationInfoRemoteImpl.tempData.places.recommended,
+                    recommended = PlaceRemoteImpl.tempData.places.recommended,
                     onRecommendedItemClicked = { navigator.push(DetailScreen()) },
                 )
             }
