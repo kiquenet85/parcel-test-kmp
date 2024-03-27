@@ -36,6 +36,9 @@ kotlin {
             // Koin
             implementation(libs.bundles.koin.android)
 
+            // Ktor
+            implementation(libs.ktor.client.okhttp)
+
             // SQLDelight
             implementation(libs.sqldelight.android.driver)
         }
@@ -56,6 +59,9 @@ kotlin {
             // Koin
             implementation(libs.bundles.koin.shared)
 
+            // Ktor
+            implementation(libs.coil.network.ktor)
+
             // Material Design
             implementation(compose.material3)
 
@@ -71,6 +77,9 @@ kotlin {
         }
 
         iosMain.dependencies {
+            // Ktor
+            implementation(libs.ktor.client.darwin)
+
             // SQLDelight
             implementation(libs.sqldelight.ios.driver)
 

@@ -15,8 +15,14 @@ class AspenColors(
     onTertiary: Color,
     background: Color,
     onBackground: Color,
+    backgroundSecondary: Color,
+    onBackgroundSecondary: Color,
     bottomBarColor: Color,
     primaryGradient: Brush,
+    secondaryGradient: Brush,
+    headLine: Color,
+    startIconColor: Color,
+    trendingIconColor: Color,
 ) {
     var primary by mutableStateOf(primary)
         internal set
@@ -42,9 +48,26 @@ class AspenColors(
     var onBackground by mutableStateOf(onBackground)
         internal set
 
+    var backgroundSecondary by mutableStateOf(backgroundSecondary)
+        internal set
+
+    var onBackgroundSecondary by mutableStateOf(onBackgroundSecondary)
+        internal set
+
     var bottomBarColor by mutableStateOf(bottomBarColor)
         internal set
 
     var primaryGradient by mutableStateOf(primaryGradient)
+        internal set
+
+    var secondaryGradient by mutableStateOf(secondaryGradient)
+        internal set
+    var headLine by mutableStateOf(headLine)
+        internal set
+
+    var startIconColor by mutableStateOf(startIconColor)
+        internal set
+
+    var trendingIconColor by mutableStateOf(trendingIconColor)
         internal set
 }
