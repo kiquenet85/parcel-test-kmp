@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 interface PlaceDatabase {
-    suspend fun getPlaceEntity(name: String): Flow<PlaceEntity>
+    suspend fun getPlaceEntity(name: String): Flow<PlaceEntity?>
     suspend fun getAllPlaces(): Flow<List<PlaceEntity>>
     suspend fun savePlaceEntity(place: PlaceEntity)
     suspend fun updatePlaceEntity(place: PlaceEntity)
@@ -21,7 +21,7 @@ class PlaceDatabaseImpl(
     private val dispatcherProvider: DispatcherProvider,
 ) : PlaceDatabase {
 
-    override suspend fun getPlaceEntity(name: String): Flow<PlaceEntity> =
+    override suspend fun getPlaceEntity(name: String): Flow<PlaceEntity?> =
         withContext(dispatcherProvider.getIO()) {
             database.placeEntityQueries.getPlaceEntityByName(name)
                 .asFlow()

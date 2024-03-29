@@ -19,7 +19,9 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.nes.parceltestkmp.common.ComposableScreen
+import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.HomeViewModel
 import co.nes.parceltestkmp.feature.place.explore.ExploreSection
+import co.nes.parceltestkmp.koin.KoinHelperKmp
 import co.nes.parceltestkmp.ui.components.AspenBottomBar
 import co.nes.parceltestkmp.ui.components.AspenBottomTab
 import co.nes.parceltestkmp.ui.components.AspenBottomTab.Companion.bottomTabTitles
@@ -32,6 +34,8 @@ class HomeScreen : ComposableScreen({
     val navigator = LocalNavigator.currentOrThrow
     val showTopBar = remember { mutableStateOf(true) }
     val selectedBottomBarIndex = remember { mutableStateOf(0) }
+
+    val homeViewModel: HomeViewModel = KoinHelperKmp.getViewModel()
 
     Scaffold(
         modifier = Modifier
@@ -67,7 +71,7 @@ class HomeScreen : ComposableScreen({
             when (val currentBottomBarTabIdx = selectedBottomBarIndex.value) {
                 AspenBottomTab.Explore.idx -> {
                     showTopBar.value = true
-                    ExploreSection(innerPadding, navigator)
+                    ExploreSection(innerPadding, navigator, homeViewModel)
                 }
 
                 else -> {

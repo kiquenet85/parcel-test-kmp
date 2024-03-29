@@ -23,7 +23,7 @@ class DetailsViewModelDemo(
 
     fun getPlaceInfo() {
         viewModelScope.launch {
-            repository.fetchLocationPlaceInfo(PlaceDetail.CentralPark.id).collect {
+            repository.fetchPlaceDetailsInfo(PlaceDetail.CentralPark.id).collect {
                 _singlePlaceInfo.value = it.toString()
             }
         }

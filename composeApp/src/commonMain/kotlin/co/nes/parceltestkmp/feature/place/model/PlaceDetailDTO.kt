@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PlaceInfoDTO(
+data class PlaceDetailDTO(
     val name: String,
     @SerialName("score")
     val rating: Double,
