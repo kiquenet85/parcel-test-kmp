@@ -61,11 +61,11 @@ fun Place.toPlaceUI(section: Int): PlaceUI {
         isFavorite = isFavorite
     )
 }
-fun PlaceEntity.toPlaceUI(section : Int): PlaceUI {
+fun PlaceEntity.toPlaceUI(): PlaceUI {
     return PlaceUI(
         name = name,
         rating = score,
-        section = section,
+        section = section.toInt(),
         imageUrl = urlImage,
         isFavorite = isFavorite == 1L
     )

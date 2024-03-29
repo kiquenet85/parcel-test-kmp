@@ -38,4 +38,13 @@ internal class HomeViewModel(
         sendCommand(PlaceListCommand.SelectPlaceList)
     }
 
+    fun updateSelectedPlace(newFavoriteValue: Boolean) {
+        selectedPlace?.copy(
+            isFavorite = newFavoriteValue
+        )?.let {
+            selectedPlace = it
+            onIntent(PlaceListIntent.Screen.UpdateSelectedPlace)
+        }
+    }
+
 }

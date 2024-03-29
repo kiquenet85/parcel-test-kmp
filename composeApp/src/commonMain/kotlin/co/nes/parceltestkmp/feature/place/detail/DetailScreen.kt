@@ -1,6 +1,7 @@
 package co.nes.parceltestkmp.feature.place.detail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,9 +26,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import co.nes.parceltestkmp.common.ComposableScreen
 import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.HomeViewModel
+import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.PlaceListCommand
 import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailViewModel
+import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsCommand
 import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsIntent
 import co.nes.parceltestkmp.feature.place.facilities.FacilitiesList
 import co.nes.parceltestkmp.koin.KoinHelperKmp
@@ -39,6 +44,7 @@ import co.nes.parceltestkmp.ui.components.AspenTopBar
 import co.nes.parceltestkmp.ui.components.AspenTopBarLayout
 import co.nes.parceltestkmp.ui.theme.AspenTheme.colors
 import co.nes.parceltestkmp.ui.theme.AspenTheme.typography
+import kotlinx.coroutines.flow.onEach
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import parceltestkmp.composeapp.generated.resources.Res
@@ -47,6 +53,8 @@ import parceltestkmp.composeapp.generated.resources.heart_circle_deactivate
 
 @OptIn(ExperimentalResourceApi::class)
 internal class DetailScreen(private val homeViewModel: HomeViewModel) : ComposableScreen({
+
+    val navigator = LocalNavigator.currentOrThrow
 
     val detailViewModelDemo: DetailsViewModelDemo = KoinHelperKmp.getViewModel()
     val detailViewModel: PlaceDetailViewModel = KoinHelperKmp.getViewModel()
@@ -57,8 +65,23 @@ internal class DetailScreen(private val homeViewModel: HomeViewModel) : Composab
 
     val placeDetails = detailViewModel.viewState.collectAsState()
 
-    LaunchedEffect(Unit){
-        if (detailViewModel.viewState.value.placeDetail.name.isEmpty()) {
+
+    detailViewModel.viewCommand.onEach {
+        it.consume { command ->
+            when (command) {
+                PlaceDetailsCommand.GoBack -> {
+                    navigator.pop()
+                }
+
+                PlaceDetailsCommand.FavoriteUpdated -> homeViewModel.updateSelectedPlace(
+                    placeDetails.value.placeDetail.isFavorite
+                )
+            }
+        }
+    }.collectAsState(PlaceListCommand.None)
+
+    LaunchedEffect(Unit) {
+        if (placeDetails.value.placeDetail.name.isEmpty()) {
             homeViewModel.selectedPlace?.let {
                 detailViewModel.onIntent(PlaceDetailsIntent.Screen.GetPlaceDetails(it))
             }
@@ -73,7 +96,9 @@ internal class DetailScreen(private val homeViewModel: HomeViewModel) : Composab
         topBar = {
             AspenTopBar(
                 layout = AspenTopBarLayout.Detail
-            )
+            ) {
+                detailViewModel.sendCommand(PlaceDetailsCommand.GoBack)
+            }
         },
         bottomBar = {
             BottomBarDetail()
@@ -109,11 +134,16 @@ internal class DetailScreen(private val homeViewModel: HomeViewModel) : Composab
                     ) {
                         Spacer(modifier = Modifier.weight(1f))
                         Icon(
-                            painter = if (placeDetails.value.placeDetail.isFavorite) painterResource(Res.drawable.heart_circle_activate)
+                            painter = if (placeDetails.value.placeDetail.isFavorite) painterResource(
+                                Res.drawable.heart_circle_activate
+                            )
                             else painterResource(Res.drawable.heart_circle_deactivate),
                             contentDescription = null,
                             tint = Color.Unspecified,
-                            modifier = Modifier.size(44.dp),
+                            modifier = Modifier.size(44.dp)
+                                .clickable {
+                                    detailViewModel.onIntent(PlaceDetailsIntent.Screen.ChangeIsFavorite)
+                                },
                         )
                     }
                 }
@@ -187,7 +217,7 @@ internal class DetailScreen(private val homeViewModel: HomeViewModel) : Composab
             FacilitiesList(placeDetails.value.placeDetail.facilities)
 
             if (placeDetails.value.placeDetail.facilities.isNotEmpty()) {
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(50.dp))
 
                 AspenButton(onClick = {
                     detailViewModelDemo.getPlaceInfo()

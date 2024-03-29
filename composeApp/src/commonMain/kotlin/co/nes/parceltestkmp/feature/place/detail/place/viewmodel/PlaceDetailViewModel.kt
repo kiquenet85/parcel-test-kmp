@@ -32,7 +32,7 @@ internal class PlaceDetailViewModel(
 
     override suspend fun handleIntent(intent: PlaceDetailsIntent) = when (intent) {
         is PlaceDetailsIntent.Screen ->
-            actionFactory.fromIntent(intent, dispatcherProvider, this).execute()
+            actionFactory.fromIntent(intent, dispatcherProvider, viewModel = this).execute()
         is PlaceDetailsIntent.Reduce ->
             reducerFactory.fromIntent(intent).reduce(currentState).let { setState(it) }
     }

@@ -20,6 +20,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import co.nes.parceltestkmp.common.ComposableScreen
 import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.HomeViewModel
+import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.PlaceListCommand
 import co.nes.parceltestkmp.feature.place.explore.ExploreSection
 import co.nes.parceltestkmp.koin.KoinHelperKmp
 import co.nes.parceltestkmp.ui.components.AspenBottomBar
@@ -43,7 +44,13 @@ class HomeScreen : ComposableScreen({
             .background(
                 color = AspenTheme.colors.background
             ),
-        topBar = { if (showTopBar.value) AspenTopBar() },
+        topBar = {
+            if (showTopBar.value) {
+                AspenTopBar {
+                   homeViewModel.sendCommand(PlaceListCommand.ExitScreen)
+                }
+            }
+        },
         bottomBar = {
             AspenBottomBar(
                 bottomTabTitles,

@@ -102,7 +102,7 @@ class PlaceInfoRepositoryImpl(
 
     override suspend fun updatePlaceInfo(newItem: PlaceEntity): Unit =
         withContext(dispatcherProvider.getIO()) {
-            placeDatabase.updatePlaceEntity(newItem)
+            placeDatabase.updatePlaceEntity(newItem).runCatching {  }
         }
 
     companion object {

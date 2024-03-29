@@ -20,7 +20,7 @@ internal class PlaceDetailsActionFactory {
 
         PlaceDetailsIntent.Screen.ChangeIsFavorite -> UpdatePlaceDetailFavoriteAction(
             viewModel = viewModel,
-            dispatcherProvider = dispatcherProvider
+            dispatcherProvider = dispatcherProvider,
         )
     }
 }

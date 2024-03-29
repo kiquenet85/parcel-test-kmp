@@ -16,8 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import co.nes.parceltestkmp.ui.theme.AspenTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,9 +23,8 @@ import co.nes.parceltestkmp.ui.theme.AspenTheme
 fun AspenTopBar(
     modifier: Modifier = Modifier,
     layout: AspenTopBarLayout = AspenTopBarLayout.Home,
+    onBackClicked: () -> Unit
 ) {
-    val navigator = LocalNavigator.currentOrThrow
-
     when(layout) {
         AspenTopBarLayout.Home -> {
             val items = listOf("Aspen, USA", "California, USA")
@@ -71,7 +68,7 @@ fun AspenTopBar(
                     ) {
                         AspenTopBarActions(
                             layout = layout,
-                            onClick = { navigator.pop() },
+                            onClick = { onBackClicked()},
                         )
                     }
                 },
