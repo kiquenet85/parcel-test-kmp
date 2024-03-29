@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import co.nes.parceltestkmp.feature.place.facilities.Facilities.Companion.facilitiesOptions
 import co.nes.parceltestkmp.ui.components.AspenText
 import co.nes.parceltestkmp.ui.theme.AspenTheme
 import co.nes.parceltestkmp.ui.theme.AspenTheme.colors
@@ -27,34 +26,34 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun FacilitiesList(
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        modifier = modifier.fillMaxWidth().padding(top = 32.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.Start,
+fun FacilitiesList(facilities: List<Facility>, modifier: Modifier = Modifier,) {
+    if (facilities.isNotEmpty()) {
+        Row(
+            modifier = modifier.fillMaxWidth().padding(top = 32.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            AspenText(
-                "Facilities",
-                style = AspenTheme.typography.titleSmall,
-            )
-
-            LazyRow(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(14.dp),
-                verticalAlignment = Alignment.CenterVertically,
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.Start,
             ) {
-                itemsIndexed(
-                    facilitiesOptions,
-                    key = { _, facility -> facility.idx}
-                ) { _, facility ->
-                    FacilitiesItem(
-                        facility = facility,
-                    )
+                AspenText(
+                    "Facilities",
+                    style = AspenTheme.typography.titleSmall,
+                )
+
+                LazyRow(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    itemsIndexed(
+                        facilities,
+                        key = { _, facility -> facility.idx }
+                    ) { _, facility ->
+                        FacilitiesItem(
+                            facility = facility,
+                        )
+                    }
                 }
             }
         }
@@ -64,7 +63,7 @@ fun FacilitiesList(
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun FacilitiesItem(
-    facility: Facilities,
+    facility: Facility,
 ) {
     Box(
         modifier = Modifier

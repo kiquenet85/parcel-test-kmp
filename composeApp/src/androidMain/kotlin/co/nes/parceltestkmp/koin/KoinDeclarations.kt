@@ -1,8 +1,10 @@
 package co.nes.parceltestkmp.koin
 
 import co.nes.parceltestkmp.data_access.database.DriverFactory
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.HomeViewModel
 import co.nes.parceltestkmp.feature.place.detail.DetailsViewModelDemo
+import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailViewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 object AndroidMainModules {
@@ -12,5 +14,7 @@ object AndroidMainModules {
 
     fun getDetailsModule() = module {
         viewModelOf(::DetailsViewModelDemo)
+        viewModelOf(::HomeViewModel)
+        viewModelOf(::PlaceDetailViewModel)
     }
 }

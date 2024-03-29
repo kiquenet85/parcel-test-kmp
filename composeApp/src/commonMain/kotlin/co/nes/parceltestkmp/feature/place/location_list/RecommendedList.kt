@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import co.nes.parceltestkmp.feature.place.model.Place
+import co.nes.parceltestkmp.feature.home.mvi.place.model.PlaceUI
 import co.nes.parceltestkmp.ui.components.AspenHorizontalList
 import co.nes.parceltestkmp.ui.components.AspenHorizontalListValue
 import co.nes.parceltestkmp.ui.components.AspenImageCard
@@ -35,8 +36,8 @@ import parceltestkmp.composeapp.generated.resources.trending_up
 
 @Composable
 fun RecommendedList(
-    recommended: List<Place>,
-    onRecommendedItemClicked: (place: Place) -> Unit,
+    recommended: List<PlaceUI>,
+    onRecommendedItemClicked: (place: PlaceUI) -> Unit,
 ) {
 
     AspenHorizontalList(
@@ -58,13 +59,13 @@ fun RecommendedList(
 @OptIn(ExperimentalMaterialApi::class, ExperimentalResourceApi::class)
 @Composable
 fun RecommendedItem(
-    place: Place,
-    onRecommendedItemClicked: (place: Place) -> Unit,
+    place: PlaceUI,
+    onRecommendedItemClicked: (place: PlaceUI) -> Unit,
 ) {
     Card(
         modifier = Modifier
             .width(174.dp)
-            .height(142.dp)
+            .heightIn(142.dp)
             .padding(top = 12.dp, end = 16.dp),
         shape = RoundedCornerShape(16.dp),
         onClick = {
@@ -84,8 +85,11 @@ fun RecommendedItem(
                 modifierOut = Modifier
                     .width(166.dp)
                     .height(96.dp),
-                imageUrl = place.image,
+                imageUrl = place.imageUrl,
                 contentDescription = place.name,
+                onClick = {
+                    onRecommendedItemClicked(place)
+                },
                 contentOut = {
                     Column(
                         modifier = Modifier

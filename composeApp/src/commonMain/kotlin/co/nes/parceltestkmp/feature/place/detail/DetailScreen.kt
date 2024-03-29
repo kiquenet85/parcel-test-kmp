@@ -19,12 +19,16 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import co.nes.parceltestkmp.common.ComposableScreen
+import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.HomeViewModel
+import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailViewModel
+import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsIntent
 import co.nes.parceltestkmp.feature.place.facilities.FacilitiesList
 import co.nes.parceltestkmp.koin.KoinHelperKmp
 import co.nes.parceltestkmp.ui.components.AspenButton
@@ -42,15 +46,24 @@ import parceltestkmp.composeapp.generated.resources.heart_circle_activate
 import parceltestkmp.composeapp.generated.resources.heart_circle_deactivate
 
 @OptIn(ExperimentalResourceApi::class)
-class DetailScreen : ComposableScreen({
-    val viewModel: DetailsViewModelDemo = KoinHelperKmp.getViewModel()
-    val placeInfo = viewModel.singlePlaceInfo.collectAsState().value
-    val allPlaceInfo = viewModel.allPlaceInfo.collectAsState().value
-    val placeInfoByName = viewModel.placeInfoByName.collectAsState().value
-    val vacationInfoData = viewModel.vacationInfoData.collectAsState().value
+internal class DetailScreen(private val homeViewModel: HomeViewModel) : ComposableScreen({
 
-    val isFavorite = true
+    val detailViewModelDemo: DetailsViewModelDemo = KoinHelperKmp.getViewModel()
+    val detailViewModel: PlaceDetailViewModel = KoinHelperKmp.getViewModel()
+    val placeInfo = detailViewModelDemo.singlePlaceInfo.collectAsState().value
+    val allPlaceInfo = detailViewModelDemo.allPlaceInfo.collectAsState().value
+    val placeInfoByName = detailViewModelDemo.placeInfoByName.collectAsState().value
+    val vacationInfoData = detailViewModelDemo.vacationInfoData.collectAsState().value
 
+    val placeDetails = detailViewModel.viewState.collectAsState()
+
+    LaunchedEffect(Unit){
+        if (detailViewModel.viewState.value.placeDetail.name.isEmpty()) {
+            homeViewModel.selectedPlace?.let {
+                detailViewModel.onIntent(PlaceDetailsIntent.Screen.GetPlaceDetails(it))
+            }
+        }
+    }
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -78,8 +91,6 @@ class DetailScreen : ComposableScreen({
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start,
         ) {
-             val url = "https://www.aspensnowmass.com/-/media/aspen-snowmass/images/image-cta-with-title-and-description/image-cta-card-tall/winter/2021-22/destination-overview-snow-groom-report-image-cta-tall-07282021/sheer-bliss.jpg?mw=564&mh=620&hash=C2F5471694BAC911CE2E9D53EF9AC064"
-
             AspenImageCard(
                 modifier = Modifier
                     .widthIn(min = 335.dp)
@@ -88,7 +99,7 @@ class DetailScreen : ComposableScreen({
                 modifierOut = Modifier
                     .widthIn(min = 335.dp)
                     .height(340.dp),
-                imageUrl = url,
+                imageUrl = homeViewModel.selectedPlace?.imageUrl.orEmpty(),
                 contentDescription = "",
                 contentOut = {
                     Column(
@@ -98,7 +109,7 @@ class DetailScreen : ComposableScreen({
                     ) {
                         Spacer(modifier = Modifier.weight(1f))
                         Icon(
-                            painter = if (isFavorite) painterResource(Res.drawable.heart_circle_activate)
+                            painter = if (placeDetails.value.placeDetail.isFavorite) painterResource(Res.drawable.heart_circle_activate)
                             else painterResource(Res.drawable.heart_circle_deactivate),
                             contentDescription = null,
                             tint = Color.Unspecified,
@@ -115,7 +126,7 @@ class DetailScreen : ComposableScreen({
                 verticalAlignment = Alignment.Bottom,
             ) {
                 AspenText(
-                    text = "Coeurdes Alpes",
+                    text = placeDetails.value.placeDetail.name,
                     style = typography.titleMedium,
                 )
                 AspenTextButton(
@@ -137,7 +148,7 @@ class DetailScreen : ComposableScreen({
                     modifier = Modifier.size(16.dp),
                 )
                 AspenText(
-                    text = "4.5 (355 Reviews)",
+                    text = "${placeDetails.value.placeDetail.rating} (${placeDetails.value.placeDetail.reviews} Reviews)",
                     style = typography.bodySmall,
                     color = colors.onSecondary,
                 )
@@ -148,10 +159,7 @@ class DetailScreen : ComposableScreen({
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 AspenText(
-                    "Aspen is as close as one can get to a storybook\n" +
-                            "alpine town in America. The choose-your-own-\n" +
-                            "adventure possibilities—skiing, hiking, dining\n" +
-                            "shopping and ....",
+                    placeDetails.value.placeDetail.description,
                     style = typography.bodyMedium,
                     color = colors.headLine,
                     modifier = Modifier.width(335.dp).height(80.dp),
@@ -176,40 +184,42 @@ class DetailScreen : ComposableScreen({
                 )
             }
 
-            FacilitiesList()
+            FacilitiesList(placeDetails.value.placeDetail.facilities)
 
-            Spacer(modifier = Modifier.height(32.dp))
+            if (placeDetails.value.placeDetail.facilities.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(32.dp))
 
-            AspenButton(onClick = {
-                viewModel.getPlaceInfo()
-            }) {
-                AspenText("Get")
+                AspenButton(onClick = {
+                    detailViewModelDemo.getPlaceInfo()
+                }) {
+                    AspenText("Get")
+                }
+
+                AspenText(placeInfo)
+
+                AspenButton(onClick = {
+                    detailViewModelDemo.getAllPlaceInfo()
+                }) {
+                    AspenText("Get All")
+                }
+
+                AspenText(allPlaceInfo)
+
+                AspenButton(onClick = {
+                    detailViewModelDemo.getPlaceByName("Central Park")
+                }) {
+                    AspenText("Get by Name")
+                }
+                AspenText(placeInfoByName)
+                AspenText(placeInfoByName)
+
+                AspenButton(onClick = {
+                    detailViewModelDemo.getVacationInfoData()
+                }) {
+                    AspenText("Get all and save in db")
+                }
+                AspenText(vacationInfoData)
             }
-
-            AspenText(placeInfo)
-
-            AspenButton(onClick = {
-                viewModel.getAllPlaceInfo()
-            }) {
-                AspenText("Get All")
-            }
-
-            AspenText(allPlaceInfo)
-
-            AspenButton(onClick = {
-                viewModel.getPlaceByName("Central Park")
-            }) {
-                AspenText("Get by Name")
-            }
-            AspenText(placeInfoByName)
-            AspenText(placeInfoByName)
-
-            AspenButton(onClick = {
-                viewModel.getVacationInfoData()
-            }) {
-                AspenText("Get all and save in db")
-            }
-            AspenText(vacationInfoData)
         }
     }
 })

@@ -1,9 +1,9 @@
 package co.nes.parceltestkmp.ui.components
 
-import co.nes.parceltestkmp.feature.place.model.Place
+import co.nes.parceltestkmp.feature.home.mvi.place.model.PlaceUI
 
 sealed class AspenHorizontalListValue(
     val name: String,
 ) {
-    data class PlaceValue(val place: Place?) : AspenHorizontalListValue(place?.name ?: "")
+    data class PlaceValue(val place: PlaceUI?) : AspenHorizontalListValue(place?.name ?: "")
 }

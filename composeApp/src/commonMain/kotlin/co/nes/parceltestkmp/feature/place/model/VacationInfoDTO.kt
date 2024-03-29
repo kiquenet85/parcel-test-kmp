@@ -1,5 +1,6 @@
 package co.nes.parceltestkmp.feature.place.model
 
+import co.nes.parceltestkmp.feature.place.facilities.Facility
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -20,7 +21,7 @@ data class Category(
 @Serializable
 data class Place(
     val name: String,
-    val image: String,
+    val imageUrl: String,
     val isFavorite: Boolean,
     val rating: Double
 )
@@ -30,8 +31,9 @@ data class PlaceDetail(
     val rating: Double,
     val reviews: Int,
     val description: String,
-    val facilities: List<String>,
+    val facilities: List<Facility>,
     val price: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val isFavorite: Boolean
 )

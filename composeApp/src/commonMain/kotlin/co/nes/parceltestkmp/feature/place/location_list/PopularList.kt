@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import co.nes.parceltestkmp.feature.place.model.Place
+import co.nes.parceltestkmp.feature.home.mvi.place.model.PlaceUI
 import co.nes.parceltestkmp.ui.components.AspenHorizontalList
 import co.nes.parceltestkmp.ui.components.AspenHorizontalListValue
 import co.nes.parceltestkmp.ui.components.AspenImageCard
@@ -37,8 +37,8 @@ import parceltestkmp.composeapp.generated.resources.heart_circle_deactivate
 
 @Composable
 fun PopularList(
-    popular: List<Place>,
-    onPopularItemClicked: (place: Place) -> Unit,
+    popular: List<PlaceUI>,
+    onPopularItemClicked: (place: PlaceUI) -> Unit,
 ) {
     AspenHorizontalList(
         title = "Popular",
@@ -58,15 +58,15 @@ fun PopularList(
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun PopularItem(
-    place: Place,
-    onPopularItemClicked: (place: Place) -> Unit,
+    place: PlaceUI,
+    onPopularItemClicked: (place: PlaceUI) -> Unit,
 ) {
     AspenImageCard(
         modifier = Modifier
             .width(188.dp)
             .height(240.dp)
             .padding(top = 12.dp, end = 28.dp),
-        imageUrl = place.image,
+        imageUrl = place.imageUrl,
         contentDescription = place.name,
         onClick = {
             onPopularItemClicked(place)

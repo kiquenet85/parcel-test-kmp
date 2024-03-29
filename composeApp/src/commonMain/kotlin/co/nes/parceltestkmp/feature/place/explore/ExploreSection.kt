@@ -6,21 +6,37 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
-import co.nes.parceltestkmp.feature.place.data.remote.PlaceRemoteImpl
+import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.HomeViewModel
+import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.PlaceListCommand
 import co.nes.parceltestkmp.feature.place.detail.DetailScreen
 import co.nes.parceltestkmp.feature.place.location_list.PopularList
 import co.nes.parceltestkmp.feature.place.location_list.RecommendedList
 import co.nes.parceltestkmp.ui.components.AspenContentTabs
 import co.nes.parceltestkmp.ui.components.AspenSearchBar
+import kotlinx.coroutines.flow.onEach
 
 @Composable
-fun ExploreSection(innerPadding: PaddingValues, navigator: Navigator) {
+internal fun ExploreSection(innerPadding: PaddingValues, navigator: Navigator, homeViewModel: HomeViewModel) {
+
+    val placeState = homeViewModel.viewState.collectAsState()
+
+    homeViewModel.viewCommand.onEach {
+        it.consume { command ->
+            when (command) {
+                PlaceListCommand.None -> Unit
+                PlaceListCommand.ExitScreen -> navigator.pop()
+                PlaceListCommand.SelectPlaceList -> navigator.push(DetailScreen(homeViewModel))
+            }
+        }
+    }.collectAsState(PlaceListCommand.None)
+
     AspenSearchBar(
         query = "Find things to do",
         modifier = Modifier.fillMaxWidth()
@@ -38,13 +54,15 @@ fun ExploreSection(innerPadding: PaddingValues, navigator: Navigator) {
         when (val newValue = selectedTab.value) {
             ExploreTab.Place.idx -> {
                 PopularList(
-                    popular = PlaceRemoteImpl.tempData.places.popular,
-                    onPopularItemClicked = { navigator.push(DetailScreen()) },
+                    popular = placeState.value.popular,
+                    onPopularItemClicked = {
+                        homeViewModel.toPlaceDetails(it)
+                    },
                 )
 
                 RecommendedList(
-                    recommended = PlaceRemoteImpl.tempData.places.recommended,
-                    onRecommendedItemClicked = { navigator.push(DetailScreen()) },
+                    recommended = placeState.value.recommended,
+                    onRecommendedItemClicked = { homeViewModel.toPlaceDetails(it) },
                 )
             }
 
