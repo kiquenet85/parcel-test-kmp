@@ -19,6 +19,7 @@ compose-plugin = "1.6.0"
 junit = "4.13.2"
 kotlin = "1.9.22"
 ktor = "2.3.7"
+app-cash-turbine = "1.0.0"
 
 ### Corrutines
 kotlinxSerializationJson = "1.6.3"
@@ -39,6 +40,9 @@ touchlab-stately-common = "2.0.7"
 ### Voyager
 voyager = "1.0.0"
 
+### Mockative
+mockative = "2.0.1"
+
 [libraries]
 ### Kotlin
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -53,6 +57,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+app-cash-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "app-cash-turbine" }
 
 ### Compose
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
@@ -90,6 +95,9 @@ sqldelight-ios-driver = { module = "app.cash.sqldelight:native-driver", version.
 
 ### Touchlab
 touchlab-stately-common = { module = "co.touchlab:stately-common", version.ref = "touchlab-stately-common" }
+
+### Mockative
+mockative = { module = "io.mockative:mockative", version.ref = "mockative" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -7,8 +7,6 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertSame
 
 @OptIn(ExperimentalCoroutinesApi::class)
 open class ParcelAndroidTest {
@@ -23,11 +21,5 @@ open class ParcelAndroidTest {
     @AfterTest
     open fun tearDown() {
         Dispatchers.resetMain()
-    }
-
-    @Test
-    fun  simpleTest() {
-        val a = 1
-        assertSame(1, a)
     }
 }
