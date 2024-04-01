@@ -1,9 +1,9 @@
-package co.nes.parceltestkmp.feature.place.detail.place.action
+package co.nes.parceltestkmp.feature.place.detail.action
 
 import co.nes.parceltestkmp.common.mvi.mvi.Action
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailViewModel
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsCommand
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsIntent
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailViewModel
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailsCommand
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailsIntent
 import co.nes.parceltestkmp.feature.place.model.toPlaceDetails
 import co.nes.parceltestkmp.providers.DispatcherProvider
 import kotlinx.coroutines.flow.firstOrNull

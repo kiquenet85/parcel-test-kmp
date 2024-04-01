@@ -80,9 +80,12 @@ class PlaceInfoRepositoryImpl(
                         val currentItem = placeDatabase.getPlaceEntity(placeInfoRemote.name)
                             .firstOrNull()
                         currentItem?.let {
-                            placeDatabase.updatePlaceEntity(placeInfoRemote.toPlaceEntity(it.section))
+                            placeDatabase.updatePlaceEntity(placeInfoRemote.toPlaceEntity(it.section, it.urlImage))
                         } ?: run {
-                            placeDatabase.savePlaceEntity(placeInfoRemote.toPlaceEntity(-1))
+                            placeDatabase.savePlaceEntity(placeInfoRemote.toPlaceEntity(
+                                -1,
+                               ""
+                            ))
                         }
                     }
                     placeInfoRemote

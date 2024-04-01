@@ -1,7 +1,8 @@
 package co.nes.parceltestkmp.common.mvi.mvi
 
 import androidx.annotation.CallSuper
-import co.nes.parceltestkmp.common.view_model.ViewModel
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
  */
 abstract class MVIViewModel<VIEWSTATE, VIEWCOMMAND, VIEWINTENT>(
     private val intentLogger: IntentLogger<VIEWINTENT>
-) : ViewModel() {
+) : ScreenModel {
     /**
      * STATE DATA boilerplate
      */
@@ -61,7 +62,7 @@ abstract class MVIViewModel<VIEWSTATE, VIEWCOMMAND, VIEWINTENT>(
      */
     @CallSuper
     fun sendCommand(command: VIEWCOMMAND) {
-        viewModelScope.launch {
+        screenModelScope.launch {
             _viewCommand.emit(ConsumableValue(command))
         }
     }
@@ -81,7 +82,7 @@ abstract class MVIViewModel<VIEWSTATE, VIEWCOMMAND, VIEWINTENT>(
      * Event receiver which handles viewmodel processing and should update the State and/or Control
      */
     open fun onIntent(intent: VIEWINTENT) {
-        viewModelScope.launch {
+        screenModelScope.launch {
             intentFlow.emit(intent)
         }
     }
@@ -91,7 +92,7 @@ abstract class MVIViewModel<VIEWSTATE, VIEWCOMMAND, VIEWINTENT>(
     abstract suspend fun handleIntent(intent: VIEWINTENT)
 
     init {
-        viewModelScope.launch {
+        screenModelScope.launch {
             intentFlow.collect { intent ->
                 intentLogger.log(intent)
                 handleIntent(intent)

@@ -1,7 +1,7 @@
-package co.nes.parceltestkmp.feature.place.detail.place.reducer
+package co.nes.parceltestkmp.feature.place.detail.reducer
 
 import co.nes.parceltestkmp.common.mvi.mvi.Reducer
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsState
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailsState
 import co.nes.parceltestkmp.feature.place.model.PlaceDetail
 
 internal class UpdatePlaceFavoriteReducer(

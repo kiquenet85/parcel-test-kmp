@@ -1,5 +1,6 @@
 package co.nes.parceltestkmp.feature.home.mvi.place.viewmodel
 
+import cafe.adriel.voyager.core.model.screenModelScope
 import co.nes.parceltestkmp.common.mvi.mvi.GeneralIntentAspenLogger
 import co.nes.parceltestkmp.common.mvi.mvi.MVIViewModel
 import co.nes.parceltestkmp.feature.home.mvi.place.factory.PlaceListActionFactory
@@ -19,7 +20,7 @@ internal class HomeViewModel(
 
     var selectedPlace : PlaceUI? = null
     init {
-        viewModelScope.launch {
+        screenModelScope.launch {
             handleIntent(PlaceListIntent.Screen.GetVacationInfo)
         }
     }

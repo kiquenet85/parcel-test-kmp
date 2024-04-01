@@ -1,10 +1,10 @@
-package co.nes.parceltestkmp.feature.place.detail.place.viewmodel
+package co.nes.parceltestkmp.feature.place.detail.viewmodel
 
 import co.nes.parceltestkmp.common.mvi.mvi.GeneralIntentAspenLogger
 import co.nes.parceltestkmp.common.mvi.mvi.MVIViewModel
 import co.nes.parceltestkmp.feature.place.data.PlaceInfoRepository
-import co.nes.parceltestkmp.feature.place.detail.place.factory.PlaceDetailsActionFactory
-import co.nes.parceltestkmp.feature.place.detail.place.factory.PlaceDetailsReducerFactory
+import co.nes.parceltestkmp.feature.place.detail.factory.PlaceDetailsActionFactory
+import co.nes.parceltestkmp.feature.place.detail.factory.PlaceDetailsReducerFactory
 import co.nes.parceltestkmp.feature.place.model.PlaceDetail
 import co.nes.parceltestkmp.providers.DispatcherProvider
 

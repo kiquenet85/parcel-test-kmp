@@ -1,4 +1,4 @@
-package co.nes.parceltestkmp.feature.place.detail.place.viewmodel
+package co.nes.parceltestkmp.feature.place.detail.viewmodel
 
 import co.nes.parceltestkmp.feature.place.model.PlaceDetail
 

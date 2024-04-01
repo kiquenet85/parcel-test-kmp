@@ -28,12 +28,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import co.nes.parceltestkmp.common.ComposableScreen
 import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.HomeViewModel
 import co.nes.parceltestkmp.feature.home.mvi.place.viewmodel.PlaceListCommand
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailViewModel
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsCommand
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsIntent
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailViewModel
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailsCommand
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailsIntent
 import co.nes.parceltestkmp.feature.place.facilities.FacilitiesList
 import co.nes.parceltestkmp.koin.KoinHelperKmp
 import co.nes.parceltestkmp.ui.components.AspenButton
@@ -52,12 +51,13 @@ import parceltestkmp.composeapp.generated.resources.heart_circle_activate
 import parceltestkmp.composeapp.generated.resources.heart_circle_deactivate
 
 @OptIn(ExperimentalResourceApi::class)
-internal class DetailScreen(private val homeViewModel: HomeViewModel) : ComposableScreen({
+internal class DetailScreen(
+    private val homeViewModel: HomeViewModel) : DetailComposableScreen({
+    val detailViewModel= it as PlaceDetailViewModel
 
     val navigator = LocalNavigator.currentOrThrow
 
     val detailViewModelDemo: DetailsViewModelDemo = KoinHelperKmp.getViewModel()
-    val detailViewModel: PlaceDetailViewModel = KoinHelperKmp.getViewModel()
     val placeInfo = detailViewModelDemo.singlePlaceInfo.collectAsState().value
     val allPlaceInfo = detailViewModelDemo.allPlaceInfo.collectAsState().value
     val placeInfoByName = detailViewModelDemo.placeInfoByName.collectAsState().value

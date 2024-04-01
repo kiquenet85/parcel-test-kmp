@@ -4,7 +4,7 @@ import co.nes.parceltestkmp.feature.home.mvi.place.model.PlaceUI
 import co.nes.parceltestkmp.feature.place.facilities.Facility
 import conesparceltestkmp.PlaceEntity
 
-fun PlaceDetailDTO.toPlaceEntity(section: Long): PlaceEntity {
+fun PlaceDetailDTO.toPlaceEntity(section: Long, urlImage: String): PlaceEntity {
     return PlaceEntity(
         name = name,
         score = rating,
@@ -16,7 +16,7 @@ fun PlaceDetailDTO.toPlaceEntity(section: Long): PlaceEntity {
         longitude = longitude,
         isFavorite = if (isFavorite) 1 else 0,
         section = section,
-        urlImage = imageURL
+        urlImage = urlImage
     )
 }
 
@@ -33,22 +33,6 @@ fun Place.toPlaceEntity(section: Int): PlaceEntity {
         longitude = 0.toDouble(),
         isFavorite = if (isFavorite) 1 else 0,
         section = section.toLong()
-    )
-}
-
-fun PlaceDetail.toPlaceEntity(urlImage: String): PlaceEntity {
-    return PlaceEntity(
-        name = name,
-        urlImage = urlImage,
-        score = rating,
-        reviews = 0,
-        description = description,
-        facilities = facilities.toStringList().concat(),
-        price = 0.toDouble(),
-        latitude = 0.toDouble(),
-        longitude = 0.toDouble(),
-        isFavorite = if (isFavorite) 1 else 0,
-        section = -1
     )
 }
 

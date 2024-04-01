@@ -1,9 +1,9 @@
-package co.nes.parceltestkmp.feature.place.detail.place.factory
+package co.nes.parceltestkmp.feature.place.detail.factory
 
-import co.nes.parceltestkmp.feature.place.detail.place.action.GetPlaceDetailAction
-import co.nes.parceltestkmp.feature.place.detail.place.action.UpdatePlaceDetailFavoriteAction
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailViewModel
-import co.nes.parceltestkmp.feature.place.detail.place.viewmodel.PlaceDetailsIntent
+import co.nes.parceltestkmp.feature.place.detail.action.GetPlaceDetailAction
+import co.nes.parceltestkmp.feature.place.detail.action.UpdatePlaceDetailFavoriteAction
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailViewModel
+import co.nes.parceltestkmp.feature.place.detail.viewmodel.PlaceDetailsIntent
 import co.nes.parceltestkmp.providers.DispatcherProvider
 
 internal class PlaceDetailsActionFactory {
