@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.touchlab.skie)
     kotlin("plugin.serialization") version "1.9.22"
+    id("com.google.devtools.ksp") version "1.9.21-1.0.15"
 }
 
 kotlin {
@@ -25,6 +26,15 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
         }
+    }
+
+    dependencies {
+        //TODO mockative requires this but may be deleted in the future
+        configurations
+            .filter { it.name.startsWith("ksp") && it.name.contains("Test") }
+            .forEach {
+                add(it.name, "io.mockative:mockative-processor:2.0.1")
+            }
     }
     
     sourceSets {
@@ -88,6 +98,17 @@ kotlin {
         }
 
         commonTest.dependencies {
+            // Mockative
+            val commonTest by getting {
+                dependencies {
+                    // Mockative
+                    implementation(libs.mockative)
+
+                    // Turbine
+                    implementation(libs.app.cash.turbine)
+                }
+            }
+
             // Coroutines
             implementation(libs.org.jetbrains.kotlinx.coroutines.test)
 
