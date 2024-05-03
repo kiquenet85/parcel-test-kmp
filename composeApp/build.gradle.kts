@@ -25,6 +25,9 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+
+            export(libs.decompose.decompose)
+            export(libs.essenty.lifecycle)
         }
     }
 
@@ -53,6 +56,10 @@ kotlin {
             implementation(libs.sqldelight.android.driver)
         }
         commonMain.dependencies {
+
+            api(libs.decompose.decompose)
+            api(libs.essenty.lifecycle)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
